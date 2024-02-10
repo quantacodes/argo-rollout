@@ -7,16 +7,16 @@ spec:
   revisionHistoryLimit: 2
   selector:
     matchLabels:
-      app: istio-rollout
+      app: argo-rollout
   template:
     metadata:
       annotations:
         sidecar.istio.io/inject: "true"
       labels:
-        app: istio-rollout
+        app: argo-rollout
     spec:
       containers:
-      - name: istio-rollout
+      - name: argo-rollout
         image: argoproj/rollouts-demo:green
         ports:
         - name: http
