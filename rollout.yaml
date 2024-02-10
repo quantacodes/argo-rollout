@@ -3,7 +3,7 @@ kind: Rollout
 metadata:
   name: argo-rollout
 spec:
-  replicas: 5
+  replicas: 10
   revisionHistoryLimit: 2
   selector:
     matchLabels:
@@ -17,15 +17,15 @@ spec:
     spec:
       containers:
       - name: argo-rollout
-        image: argoproj/rollouts-demo:bad-red
+        image: argoproj/rollouts-demo:green
         ports:
         - name: http
           containerPort: 8080
           protocol: TCP
         resources:
           requests:
-            memory: 32Mi
-            cpu: 5m
+            memory: 100Mi
+            cpu: 50m
   strategy:
     canary:
       canaryService: argo-rollout-canary
