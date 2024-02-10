@@ -1,7 +1,7 @@
 apiVersion: v1
 kind: Service
 metadata:
-  name: istio-rollout-canary
+  name: argo-rollout-canary
 spec:
   ports:
   - port: 80
@@ -9,13 +9,13 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: istio-rollout
+    app: argo-rollout
 
 ---
 apiVersion: v1
 kind: Service
 metadata:
-  name: istio-rollout-stable
+  name: argo-rollout-stable
 spec:
   ports:
   - port: 80
@@ -23,4 +23,4 @@ spec:
     protocol: TCP
     name: http
   selector:
-    app: istio-rollout
+    app: argo-rollout

@@ -1,12 +1,11 @@
 apiVersion: argoproj.io/v1alpha1
 kind: AnalysisTemplate
 metadata:
-  name: istio-success-rate
+  name: argo-success-rate
 spec:
   # this analysis template requires a service name and namespace to be supplied to the query
   args:
   - name: service
-  - name: namespace
   metrics:
   - name: success-rate
     initialDelay: 60s
@@ -18,16 +17,7 @@ spec:
       prometheus:
         address: http://prometheus.istio-system:9090
         query: >+
-          sum(irate(
-            istio_requests_total{
-              reporter="source",
-              destination_service=~"{{args.service}}.{{args.namespace}}.svc.cluster.local",
-              response_code=~"2.*"
-            }[1m]))
-          / sum(irate(
-            istio_requests_total{
-              reporter="source",
-              destination_service=~"{{args.service}}.{{args.namespace}}.cluster.local"
-            }[1m]
-          ))
+          sum(irate(istio_requests_total{destination_service="argo-rollout-canary.argo.svc.cluster.local",reporter="source",response_code=~"2.*"}[1m]
+          ))/
+          sum(irate(istio_requests_total{destination_service="argo-rollout-canary.argo.svc.cluster.local",reporter="source"}[1m]))
   
