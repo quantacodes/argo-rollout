@@ -38,6 +38,10 @@ spec:
         args:             # arguments allow AnalysisTemplates to be re-used
         - name: service 
           value: argo-rollout-canary
+        - name: namespace
+          valueFrom:
+            fieldRef:
+              fieldPath: metadata.namespace
       trafficRouting:
         istio:
           virtualService:
